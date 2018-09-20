@@ -1,10 +1,11 @@
-// Node Info Cli App
-#include <errno.h>
+// System Info Cli App
+#include <sys/sysinfo.h>
+#include <sys/utsname.h>
 #include <json-c/json.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/sysinfo.h>
-#include <sys/utsname.h>
+#include <string.h>
+#include <errno.h>
 
 int main()
 {
@@ -15,7 +16,8 @@ int main()
     const double megabyte = 1024 * 1024;
     float load_shift = 1.f / (1 << SI_LOAD_SHIFT);
     /* End Constants */
-    struct sysinfo si; // Yes
+    struct sysinfo si;
+    memset(&si, 0, sizeof si);
     if (sysinfo(&si) < 0)
     {
         perror("sysinfo");
@@ -63,11 +65,10 @@ int main()
     int bufsize = 32;
     char* upstr = malloc(bufsize);
     if (snprintf(upstr, bufsize, "%ld:%02ld:%02ld",
-                (si.uptime % day)/hour,
-                (si.uptime % hour)/minute,
-                si.uptime % minute) >= bufsize)
-    {
-        fprintf(stderr, "Failed to format uptime string : %d\n", errno);
+                  (si.uptime % day)/hour,
+                  (si.uptime % hour)/minute,
+                  si.uptime % minute) >= bufsize) {
+        perror("snprintf");
         exit(EXIT_FAILURE);
     }
     json_object *up = json_object_new_string(upstr);

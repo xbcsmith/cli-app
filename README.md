@@ -1,17 +1,35 @@
 # cli-app
 
-Example CLI C App
+Example CLI Apps
 
-## Install required libraries
+## C
 
-```sudo dnf install vim-enhanced clang make json-c-devel json-c pkgconfig```
 
-## Compile
+### nodeinfo
 
-```cd src && make```
+Simple C app that outputs information similar to `uname`
 
-## Install
+./examples/nodeinfo
 
-```sudo make install DESTDIR=/usr/local```
+### systeminfo
+
+Simple C App that outputs information similar to `uname` and `uptime` in JSON
+
+./examples/systeminfo
+
+
+##  C++
+
+TBD
+
+## Python
+
+### converter
+
+Simple Python CLI that converts JSON to YAML and back again.
+
+./examples/converter
+
+
 
 
