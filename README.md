@@ -30,6 +30,12 @@ Simple Python CLI that converts JSON to YAML and back again.
 
 ./examples/converter
 
+## Go
 
+### go-nodeinfo
+
+Simple Go app that outputs information similar to `uname`
+
+./examples/go-nodeinfo
 
 
