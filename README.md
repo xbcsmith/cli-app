@@ -4,7 +4,6 @@ Example CLI Apps
 
 ## C
 
-
 ### nodeinfo
 
 Simple C app that outputs information similar to `uname`
@@ -17,8 +16,7 @@ Simple C App that outputs information similar to `uname` and `uptime` in JSON
 
 ./examples/systeminfo
 
-
-##  C++
+## C++
 
 TBD
 
@@ -37,5 +35,3 @@ Simple Python CLI that converts JSON to YAML and back again.
 Simple Go app that outputs information similar to `uname`
 
 ./examples/go-nodeinfo
-
-
