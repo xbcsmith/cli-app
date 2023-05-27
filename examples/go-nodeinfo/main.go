@@ -26,6 +26,7 @@ func fmtValue(i [65]uint8) string {
 		}
 		b = append(b, v)
 	}
+
 	return string(b)
 }
 

@@ -11,23 +11,16 @@ GO      = go
 GOFMT   = gofmt
 GOBUILD = CGO_ENABLED=0 go build -v
 
-all: fmt lint test $(BINARY)
+all: fmt test $(BINARY)
 
 SOURCES = $(shell find -name vendor -prune -o -name \*.go -print)
 
 $(BINARY): $(SOURCES); $(info $(M) building executable…) @ ## Build program binary
 	$Q $(GOBUILD) $(TAGS) -o $@ .
 
-GOLINT = $(TOOLS)/golint
-$(GOLINT): ; $(info $(M) building golint…)
-	$Q go build -o $@ golang.org/x/lint/golint
-
-
-.PHONY: lint
-lint: $(GOLINT) ; $(info $(M) running golint…) @ ## Run golint change ret=1 to make lint required
-	$Q ret=0 && for pkg in $(PKGS); do \
-		test -z "$$($(GOLINT) $$pkg | tee /dev/stderr)" || ret=0 ; \
-	 done ; exit $$ret
+.PHONY: megalint
+megalint: ; $(info $(M) running golangci-lint with switches...) @ ## Run golangci-lint with a lot of switches
+	$Q golangci-lint run -v --fix
 
 .PHONY: fmt
 fmt: ; $(info $(M) running gofmt…) @ ## Run gofmt on all source files
